@@ -1,17 +1,23 @@
-import { useEffect } from "react";
-import { ApiSelector } from "./components/ApiSelector";
+import { useEffect, useState } from "react";
 
 const App = () => {
+  const [text, setText] = useState("");
+
   useEffect(() => {
-    ApiSelector().connect();
+    const timeout = setTimeout(() => {
+      console.log(text);
+    }, 1000);
+
     return () => {
-      console.log("Cleanup: disconnecting...");
-      ApiSelector().disconnect();
+      clearTimeout(timeout);
     };
-  }, []);
+  }, [text]);
+
   return (
     <>
-      <h1>Welcome to Connection</h1>
+      <h1>WHat to log?</h1>
+      <input type="text" onChange={(e) => setText(e.target.value)} />
+      {text && <p>{text}</p>}
     </>
   );
 };
