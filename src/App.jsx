@@ -4,12 +4,12 @@ const App = () => {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      console.log(text);
-    }, 1000);
+    console.log('🔵 Schedule "' + text + '" log');
+    const timeoutId = setTimeout(() => console.log("⏰ " + text), 1000);
 
     return () => {
-      clearTimeout(timeout);
+      console.log('🟡 Cancel "' + text + '" log');
+      clearTimeout(timeoutId);
     };
   }, [text]);
 
